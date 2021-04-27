@@ -6,16 +6,20 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
   data() {
     return {
+      res: {},
     }
   },
   components: {
   },
   mounted() {
+    this.axios.get('/user/login').then((res) => {
+      this.res = res;
+      console.log('res', res);
+    })
   }
 }
 </script>
