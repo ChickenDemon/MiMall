@@ -5,6 +5,7 @@ import Index from './pages/index';
 import Product from './pages/product/index';
 import Detail from './pages/product/detail';
 import Cart from './pages/cart/index';
+import Login from './pages/login/index';
 import Order from './pages/order/index';
 import OrderConfirm from './pages/order/orderConfirm';
 import OrderList from './pages/order/orderList';
@@ -21,7 +22,7 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: '/index',
+          path: 'index',
           name: 'index',
           component: Index,
         },
@@ -41,6 +42,11 @@ export default new Router({
       path: '/cart',
       name: 'cart',
       component: Cart
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/order',
