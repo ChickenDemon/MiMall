@@ -247,8 +247,10 @@ export default {
       this.axios.post('/carts', {
         productId: id,
         selected: true,
-      }).then(() => {
+      }).then((res) => {
         this.showModel = true;
+        console.log('res->', res);
+        this.$store.dispatch('saveCartCount', res.data.cartProductVoList.length);
       }).catch(() => {
         this.showModel = true;
       })

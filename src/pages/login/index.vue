@@ -67,10 +67,13 @@ export default {
             message: '登录成功',
             type: 'success',
           });
-          // this.$cookie.set('userId', res.data.id, { expires: 1 });
+          /** 设置过期时间与浏览器的session保持一致 */
+          this.$cookie.set('userId', res.data.id, { expires: 'Session' });
           // this.$store.dispatch('saveUserName', res.data.username);
           this.saveUserName(res.data.username);
-          this.$router.push({path: '/index'});
+          this.$router.push({ path: '/index', query: {
+            from: 'login'
+          }});
         }
       });
     },
@@ -91,7 +94,7 @@ export default {
     },
 
     onClickImg() {
-      this.$router.push('/index');
+      this.$router.push({ path: '/index'});
     },
 
     keyDown(e) {

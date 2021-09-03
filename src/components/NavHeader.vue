@@ -139,6 +139,9 @@ export default {
   },
   mounted() {
     this.getProductList();
+    if (this.$route.query?.from === 'login') {
+      this.getCartCount();
+    }
   },
 
   filters: {
@@ -151,6 +154,14 @@ export default {
   },
 
   methods: {
+    getCartCount() {
+      this.axios.get('/carts/products/sum').then((res) => {
+        if (res && res.status === 0) {
+          this.$store.dispatch('saveCartCount', res.data);
+        }
+      })
+    },
+
     getProductList() {
       this.axios.get('/products', {
         params: {
@@ -192,9 +203,11 @@ export default {
       this.axios.post('/user/logout').then((res) => {
         if (res && res.status === 0) {
           this.$message.success('已注销');
-          this.saveUserName('');
+          this.$cookie.set('userId', {expires: '-1'});
+          this.$store.dispatch('saveUserName', '');
+          this.$store.dispatch('saveCartCount', '0');
         }
-      })
+      });
     }
   }
 }
