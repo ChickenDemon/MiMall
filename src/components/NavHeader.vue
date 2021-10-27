@@ -168,8 +168,8 @@ export default {
           categoryId: '100012',
         }
       }).then((res) => {
-        console.log('resssss' + res.list);
-        this.phoneList = res.list;
+        console.log('resssss' + res.data.list);
+        this.phoneList = res.data.list;
       })
     },
 
@@ -392,7 +392,7 @@ export default {
       border-top: 1px solid #E5E5E5;
       box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
       background: #fff;
-      z-index: 10;
+      z-index: 20;
       opacity: 0;
       overflow: hidden;
       height: 0;

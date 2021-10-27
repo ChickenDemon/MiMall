@@ -7,8 +7,8 @@
           <a class="m-container__logo"></a>
         </div>
         <div class="m-container__title-container">
-          <span class="m-container__title">我的购物车</span>
-          <span class="m-container__tip">温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</span>
+          <span class="m-container__title">{{ title }}</span>
+          <slot name="tip"></slot>
         </div>
       </div>
       <div class="m-topbaruser">
@@ -27,6 +27,12 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'order-header',
+  props: {
+    title: {
+      type: String,
+      default: '标题',
+    }
+  },
   data() {
     return {
     }

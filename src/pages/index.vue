@@ -2,52 +2,56 @@
   <div class="p-index page">
     <div class="p-container">
       <div class="p-ads">
-        <div class="p-menu">
-          <ul class="p-wrap">
-            <li class="p-wrap__item" v-for="(item, index) in menuList" :key="index" @mouseover="onOver(index)" @mouseout="onOut(index)">
-              <a href="javascript;">{{ item }}</a>
-              <div class="p-wrap__arrow"></div>
-              <div v-if="index === 0" class="p-wrap-child" :class="{'p-wrap-child--show': showMobileChild}">
-                <div class="p-wrap-child__item" v-for="(menu, mindex) in menuItems" :key="`${menu}${mindex}`">
-                  <div class="p-wrap-child__child" v-for="(child, cindex) in menu" :key="`${child}${cindex}`" @click="onClick(child)">
-                    <img class="p-wrap-child__img" :src="child ? child.imgs: '/imgs/item-box-1.png'" alt="">
-                    {{child.name}}
+        <div class="p-top">
+          <div class="p-menu">
+            <ul class="p-wrap">
+              <li class="p-wrap__item" v-for="(item, index) in menuList" :key="index" @mouseover="onOver(index)" @mouseout="onOut(index)">
+                <a href="javascript;">{{ item }}</a>
+                <div class="p-wrap__arrow"></div>
+                <div v-if="index === 0" class="p-wrap-child" :class="{'p-wrap-child--show': showMobileChild}">
+                  <div class="p-wrap-child__item" v-for="(menu, mindex) in menuItems" :key="`${menu}${mindex}`">
+                    <div class="p-wrap-child__child" v-for="(child, cindex) in menu" :key="`${child}${cindex}`" @click="onClick(child)">
+                      <img class="p-wrap-child__img" :src="child ? child.imgs: '/imgs/item-box-1.png'" alt="">
+                      {{child.name}}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="p-carousel">
-          <el-carousel trigger="click" height="451px" :interval="5000" arrow="always">
-            <el-carousel-item v-for="(item, index) in carouselList" :key="index">
-              <a :href="`/#/product/index/${item.id}`"><img class="p-carousel__img" :src="item.img"></a>
-            </el-carousel-item>
-          </el-carousel>
-        </div>
-        <div class="p-advertisement">
-          <div class="p-advertisement__item" v-for="(item, index) in adsList" :key="index">
-            <img v-lazy="item.img">
+              </li>
+            </ul>
+          </div>
+          <div class="p-carousel">
+            <el-carousel trigger="click" height="451px" :interval="5000" arrow="always">
+              <el-carousel-item v-for="(item, index) in carouselList" :key="index">
+                <a :href="`/#/product/index/${item.id}`"><img class="p-carousel__img" :src="item.img"></a>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+          <div class="p-advertisement">
+            <div class="p-advertisement__item" v-for="(item, index) in adsList" :key="index">
+              <img v-lazy="item.img">
+            </div>
+          </div>
+          <div class="p-banner">
+            <img v-lazy="'/imgs/banner-1.png'">
           </div>
         </div>
-        <div class="p-banner">
-          <img v-lazy="'/imgs/banner-1.png'">
-        </div>
-        <div class="p-product-box">
-          <h2 class="p-product-box__title">手机</h2>
-          <div class="p-product-container">
-            <div class="p-product-container__left">
-              <img src="/imgs/mix-alpha.jpg">
-            </div>
-            <div class="p-product-container__right">
-              <div class="p-product-list" v-for="(item, index) in phoneList" :key="index">
-                <div class="p-product-list__item" v-for="(pItem, pIndex) in item" :key="`${pIndex}${index}`">
-                  <span v-if="pItem.status === 0" class="p-product-list__label p-product-list__label--new">新品</span>
-                  <span v-else-if="pItem.status === 1" class="p-product-list__label p-product-list__label--kill">秒杀</span>
-                  <div class="p-product-list__img"><img v-lazy="pItem.mainImage"></div>
-                  <span class="p-product-list__title">{{pItem.name}}</span>
-                  <span class="p-product-list__desc">{{pItem.subtitle}}</span>
-                  <div class="p-product-list__price" @click="onAddCart(pItem.id)">{{pItem.price}}</div>
+        <div class="p-product">
+          <div class="p-product-box">
+            <h2 class="p-product-box__title">手机</h2>
+            <div class="p-product-container">
+              <div class="p-product-container__left">
+                <img src="/imgs/mix-alpha.jpg">
+              </div>
+              <div class="p-product-container__right">
+                <div class="p-product-list" v-for="(item, index) in phoneList" :key="index">
+                  <div class="p-product-list__item" v-for="(pItem, pIndex) in item" :key="`${pIndex}${index}`">
+                    <span v-if="pItem.status === 0" class="p-product-list__label p-product-list__label--new">新品</span>
+                    <span v-else-if="pItem.status === 1" class="p-product-list__label p-product-list__label--kill">秒杀</span>
+                    <div class="p-product-list__img"><img v-lazy="pItem.mainImage"></div>
+                    <span class="p-product-list__title">{{pItem.name}}</span>
+                    <span class="p-product-list__desc">{{pItem.subtitle}}</span>
+                    <div class="p-product-list__price" @click="onAddCart(pItem.id)">{{pItem.price}}</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -277,16 +281,14 @@ export default {
 .p-index.page {
   .p {
     &-carousel {
+      flex-shrink: 1;
+      width: 100%;
+      position: relative;
+
       &__img {
         width: 100%;
         height: 100%;
       }
-    }
-
-    &-carousel {
-      flex-shrink: 1;
-      width: 100%;
-      position: relative;
 
       ::v-deep {
         & .el-carousel {
@@ -297,6 +299,11 @@ export default {
           }
         }
       }
+    }
+
+    &-top {
+      width: 1200px;
+      margin: 0 auto;
     }
 
     &-menu {
@@ -345,9 +352,11 @@ export default {
       left: 264px;
       top: 0;
       width: 0;
-      height: 451px;
+      height: 453px;
       opacity: 0;
       background: #fff;
+      display: none;
+
       &__item {
         display: flex;
         flex-direction: row;
@@ -356,19 +365,24 @@ export default {
       }
 
       &__img {
-        width: 60px;
-        height: 60px;
+        width: 42px;
+        height: 35px;
       }
 
       &__child {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        width: 217px;
+        height: 75px;
+        align-items: center;
+        justify-content: center;
       }
-    }
 
-    &-wrap-child--show {
-      width: 1085px;
-      opacity: 1;
+      &--show {
+        width: 936px;
+        opacity: 1;
+        display: block;
+      }
     }
 
     &-advertisement{
@@ -391,15 +405,23 @@ export default {
     }
 
     &-banner {
+      padding-bottom: 50px;
       img {
         width: 100%;
       }
     }
 
+    &-product {
+      background: #f5f5f5;
+      padding-top: 30px;
+      padding-bottom: 50px;
+    }
+
     &-product-box {
       display: flex;
       flex-direction: column;
-      margin-top: 30px;
+      width: 1200px;
+      margin: 0 auto;
 
       &__title {
         font-size: 22px;
@@ -424,6 +446,7 @@ export default {
       }
 
       &__right {
+        margin-left: 16px;
         flex-grow: 1;
       }
     }
@@ -445,7 +468,8 @@ export default {
       }
 
       &__item {
-        width: 236px;
+        background: #fff;
+        width: 230px;
         height: 302px;
         display: flex;
         flex-direction: column;

@@ -174,7 +174,7 @@ export default {
       if (!isCheck.length) {
         this.$message.warning('请选择一件商品')
       } else {
-        this.$router.push('/order/confirm')
+        this.$router.push('/order/orderConfirm');
       }
     }
   }
