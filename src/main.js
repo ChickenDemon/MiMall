@@ -27,9 +27,9 @@ axios.interceptors.response.use(function(response) {
     return res;
   }else if(res.status === 10) {
     if(path.includes('#')) {
-      if (path !== '/#/login') {
-        window.location.href = '/#/login';
-      }
+      // if (path !== '/#/login') {
+      //   window.location.href = '/#/login';
+      // }
     }
   }else {
     alert(res.msg);

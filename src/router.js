@@ -2,10 +2,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './pages/home';
 import Index from './pages/index';
-import Product from './pages/product/index';
+// import Product from './pages/product/index';
 import Detail from './pages/product/detail';
 import Cart from './pages/cart/index';
-import Login from './pages/login/index';
+// import Login from './pages/login/index';
 import Order from './pages/order/index';
 import OrderConfirm from './pages/order/orderConfirm';
 import OrderList from './pages/order/orderList';
@@ -20,6 +20,7 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+      redirect: '/index',
       children: [
         {
           path: 'index',
@@ -29,7 +30,8 @@ export default new Router({
         {
           path: 'product/index/:id',
           name: 'product-index',
-          component: Product,
+          /** 按需加载（router懒加载方式一） */
+          component: resolve => require(['./pages/product/index.vue'], resolve),
         },
         {
           path: 'product/detail/:id',
@@ -46,7 +48,8 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      /** 按需加载方式二 */
+      component: () => import('./pages/login/index.vue'),
     },
     {
       path: '/order',
